@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "json-server --watch db.json"
+    "back": "json-server --watch db.json",
+    "start": "node server.js"
   },
   "dependencies": {
     "debug": "^4.3.4",
