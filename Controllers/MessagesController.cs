@@ -18,9 +18,13 @@ public class MessagesController : Controller
     }
 
     [HttpGet]
-    public IActionResult getMessages()
+    public IActionResult GetMessages(int? threadId)
     {
-        var messages = _context.Messages;
+        IQueryable<Message> messages = _context.Messages;
+        if (threadId != null)
+        {
+            messages = messages.Where(m => m.ThreadId == threadId);
+        }
 
         return Ok(messages);
     }
@@ -31,14 +35,6 @@ public class MessagesController : Controller
         var message = _context.Messages.Find(id);
 
         return Ok(message);
-    }
-
-    [HttpGet]
-    public IActionResult GetMessagesByThreadId(int threadId)
-    {
-        var messages = _context.Messages.Where(m => m.ThreadId == threadId);
-
-        return Ok(messages);
     }
 
     [HttpPost]
