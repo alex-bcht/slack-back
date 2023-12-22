@@ -4,6 +4,8 @@ using slack_back.Models;
 
 namespace slack_back.Controllers;
 
+[Route("/[controller]")]
+[ApiController]
 public class MessagesController : Controller
 {
     private readonly ILogger<MessagesController> _logger;
@@ -15,38 +17,38 @@ public class MessagesController : Controller
         _logger = logger;
     }
 
-    [HttpGet("messages")]
+    [HttpGet]
     public IActionResult getMessages()
     {
         var messages = _context.Messages;
 
-        return Json(messages);
+        return Ok(messages);
     }
 
-    [HttpGet("messages/{id}")]
+    [HttpGet("{id}")]
     public IActionResult getMessage(int id)
     {
         var message = _context.Messages.Find(id);
 
-        return Json(message);
+        return Ok(message);
     }
 
-    [HttpGet("messages")]
+    [HttpGet]
     public IActionResult GetMessagesByThreadId(int threadId)
     {
         var messages = _context.Messages.Where(m => m.ThreadId == threadId);
 
-        return Json(messages);
+        return Ok(messages);
     }
 
-    [HttpPost("messages")]
+    [HttpPost]
     public void createMessage(Message message)
     {
         _context.Messages.Add(message);
         _context.SaveChanges();
     }
 
-    [HttpPut("messages/{id}")]
+    [HttpPut("{id}")]
     public void updateMessage(int id, Message message)
     {
         var messageEntity = _context.Messages.Find(id);
@@ -55,7 +57,7 @@ public class MessagesController : Controller
         _context.SaveChanges();
     }
 
-    [HttpDelete("messages/{id}")]
+    [HttpDelete("{id}")]
     public void DeleteMessage(int id)
     {
         var messageEntity = _context.Messages.Find(id);
