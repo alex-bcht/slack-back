@@ -1,6 +1,7 @@
 using System.Diagnostics;
-using slack_back.Models;
 using Microsoft.AspNetCore.Mvc;
+using slack_back.Models;
+
 namespace slack_back.Controllers;
 
 [Route("/[controller]")]
@@ -15,6 +16,7 @@ public class ThreadsController : Controller
         _context = context;
         _logger = logger;
     }
+
     [HttpGet]
     public IActionResult GetThreads()
     {
@@ -38,6 +40,7 @@ public class ThreadsController : Controller
         _context.SaveChanges();
         return CreatedAtAction(nameof(GetThreadById), new { id = newThread.Id }, newThread);
     }
+
     [HttpPut("{id}")]
     public IActionResult UpdateThread(int id, Models.Thread updatedThread)
     {
@@ -46,6 +49,7 @@ public class ThreadsController : Controller
         _context.SaveChanges();
         return NoContent();
     }
+
     [HttpDelete("id")]
     public IActionResult DeleteThread(int id)
     {
@@ -58,5 +62,4 @@ public class ThreadsController : Controller
         _context.SaveChanges();
         return NoContent();
     }
-
 }
