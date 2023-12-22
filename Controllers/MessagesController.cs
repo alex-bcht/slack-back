@@ -14,3 +14,17 @@ public class MessagesController : Controller
         _logger = logger;
     }
 }
+[http ("messages")]
+public IActionResult Getmessages()
+{
+    var message = _context.Messages
+return view(json)
+};
+
+[Route ("Messages/{id}")]
+[http "message"]
+public IActionResult Getmessage(string "id")
+{
+     var message = _context.Messages.Find(id);
+    return view(json)
+};
