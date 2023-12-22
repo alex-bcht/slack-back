@@ -16,6 +16,22 @@ public class MessagesController : Controller
     }
 
     [HttpGet("messages")]
+    public IActionResult getMessages()
+    {
+        var messages = _context.Messages;
+
+        return Json(messages);
+    }
+
+    [HttpGet("messages/{id}")]
+    public IActionResult getMessage(int id)
+    {
+        var message = _context.Messages.Find(id);
+
+        return Json(message);
+    }
+
+    [HttpGet("messages")]
     public IActionResult GetMessagesByThreadId(int threadId)
     {
         var messages = _context.Messages.Where(m => m.ThreadId == threadId);
